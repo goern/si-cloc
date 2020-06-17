@@ -74,29 +74,6 @@ spec:
           - name: "THOTH_SI_CLOC_PACKAGE_VERSION"
           - name: "THOTH_SI_CLOC_PACKAGE_INDEX"
           - name: "THOTH_SI_CLOC_DIR"
-          - name: "THOTH_S3_ENDPOINT_URL"
-          - name: "THOTH_CEPH_BUCKET_NAME"
-          - name: "THOTH_CEPH_BUCKET_PREFIX"
-          - name: "THOTH_DEPLOYMENT_NAME"
-      outputs:
-        artifacts:
-          - name: outputdocument
-            path: "/mnt/workdir/cloc_results"
-            archive:
-              none: {}
-            s3:
-              key: "{{inputs.parameters.THOTH_CEPH_BUCKET_PREFIX}}/\
-              {{inputs.parameters.THOTH_DEPLOYMENT_NAME}}/\
-              security-indicators/{{inputs.parameters.THOTH_DOCUMENT_ID}}/si-cloc"
-              endpoint: "{{inputs.parameters.THOTH_S3_ENDPOINT_URL}}"
-              bucket: "{{inputs.parameters.THOTH_CEPH_BUCKET_NAME}}"
-              insecure: true
-              accessKeySecret:
-                name: argo-artifact-repository-secrets
-                key: accessKey
-              secretKeySecret:
-                name: argo-artifact-repository-secrets
-                key: secretKey
       container:
         name: si-cloc
         image: "si-cloc"
